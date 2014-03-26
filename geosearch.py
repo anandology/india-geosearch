@@ -10,8 +10,9 @@ db = web.database(dbn="postgres", db="geosearch")
 class geosearch:
     def GET(self):
         i = web.input(lat=None, lon=None)
-        if not i.lat or i.lon:
-            return "Please specify lat and lon parameters"
+        web.header("content-type", "application/json")
+        if not i.lat or not i.lon:
+            return '{"error": "Please specify lat and lon parameters"}'
 
         point = 'Point({0} {1})'.format(i.lat, i.lon)
         q = "SELECT pc_no, pc_name FROM pc WHERE ST_Within(ST_GeomFromText($point, 4326), geom)"
