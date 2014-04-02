@@ -11,6 +11,7 @@ class geosearch:
     def GET(self):
         i = web.input(lat=None, lon=None)
         web.header("content-type", "application/json")
+        web.header("Access-Control-Allow-Origin", "*")
         if not i.lat or not i.lon:
             return '{"error": "Please specify lat and lon parameters"}'
 
