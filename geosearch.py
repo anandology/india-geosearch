@@ -16,7 +16,7 @@ class geosearch:
             return '{"error": "Please specify lat and lon parameters"}'
 
         point = 'Point({0} {1})'.format(i.lat, i.lon)
-        q = "SELECT pc_no, pc_name FROM pc WHERE ST_Within(ST_GeomFromText($point, 4326), geom)"
+        q = "SELECT pc_code, pc_name, st_code, st_name FROM india_pc_2014 WHERE ST_Within(ST_GeomFromText($point, 4326), geom)"
         result = db.query(q, vars={"point": point})
         match = result and result[0] or None
         return json.dumps(match)
