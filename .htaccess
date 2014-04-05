@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^static/(.+)$ /static/$1
+RewriteRule ^js/(.+)$ /js/$1

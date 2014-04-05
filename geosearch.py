@@ -2,10 +2,16 @@ import web
 import json
 
 urls = (
+    "/", "index",
     "/geosearch", "geosearch"
 )
 app = web.application(urls, globals())
 db = web.database(dbn="postgres", db="geosearch")
+
+class index:
+    def GET(self):
+        path = os.path.join(os.path.dirname(__file__), "examples/ex1.html")
+        return open(path).read()
 
 class geosearch:
     def GET(self):
