@@ -20,7 +20,7 @@ class geosearch:
         result = db.query(q, vars={"point": point})
         match = result and result[0] or None
         if match:
-            match['key'] = "{}/PC{:02d}".format(match['state_name'], match['pc_code'])
+            match['key'] = "{}/PC{:02d}".format(match['st_name'], match['pc_code'])
         return json.dumps(match)
 
 if __name__ == "__main__":
