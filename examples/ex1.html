@@ -1,0 +1,31 @@
+<html>
+    <head>
+        <script type="text/javascript" src="../js/jquery.min.js"></script>
+        <script type="text/javascript" src="../js/jquery-geosearch.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                $("#location").geosearch({
+                    success: function (location) {
+                        console.log(location);
+                        $("#response").html(JSON.stringify(location, null, "  "));
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body style="background: #eed; margin: 0; padding: 0;">
+        <div class="wrapper" style="margin: 20 auto; width: 900px; padding: 20px; background: white;">
+        <h1>India GeoSearch Demo</h1>
+        <input type="text" id="location" style="width: 400px; font-size: 1.2em;">
+
+        <h2>Response</h2>
+        <pre id="response">
+        </pre>
+
+        <h1>How to Use</h1>
+        View source of this HTML page.
+
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>    
+        </div>
+    </body>
+</html>
