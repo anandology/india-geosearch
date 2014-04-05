@@ -19,6 +19,8 @@ class geosearch:
         q = "SELECT pc_code, pc_name, st_code, st_name FROM india_pc_2014 WHERE ST_Within(ST_GeomFromText($point, 4326), geom)"
         result = db.query(q, vars={"point": point})
         match = result and result[0] or None
+        if match:
+            match['key'] = "{}/PC{:02d}".format(match['state_name'], match['pc_code'])
         return json.dumps(match)
 
 if __name__ == "__main__":
