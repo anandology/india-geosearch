@@ -11,6 +11,7 @@ db = web.database(dbn="postgres", db="geosearch")
 
 class index:
     def GET(self):
+        web.header("content-type", "text/html")
         path = os.path.join(os.path.dirname(__file__), "examples/ex1.html")
         return open(path).read()
 
