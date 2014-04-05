@@ -4,6 +4,7 @@ import os
 
 urls = (
     "/", "index",
+    "/js/(.*)", "javascript",
     "/geosearch", "geosearch"
 )
 app = web.application(urls, globals())
@@ -30,6 +31,16 @@ class geosearch:
         if match:
             match['key'] = "{}/PC{:02d}".format(match['st_name'], match['pc_code'])
         return json.dumps(match)
+
+class javascript:
+    def GET(self, filename):
+        web.header("content-type", "text/javascript")
+        path = os.path.join(os.path.dirname(__file__), "js", filename)
+        if os.path.exists(path):
+            return open(path).read()
+        else:
+            raise web.notfound()
+
 
 if __name__ == "__main__":
     app.run()
