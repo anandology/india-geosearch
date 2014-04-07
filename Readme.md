@@ -10,7 +10,8 @@ What is covered:
 * Assembly Constituencies of Andhra Pradesh
 * Wards and Assembly Constituencies of Bangalore city (coming soon)
 
-Look at live at:
+The webapp is hosted of Red Hat Open Shift.
+
 <http://geosearch-anandology.rhcloud.com>
 
 # Credits
