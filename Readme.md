@@ -17,9 +17,9 @@ Look at live at:
 
 Thanks to:
 
-* [datameet](https://github.com/datameet/maps) for parliamentary constituency maps
-* Raphael Susewind for assembly constituency boundaries of Andhra Pradesh
-* [Open Bangalore](http://openbangalore.org/) for ward boundaries of Bangalore
+* [**datameet group**](https://github.com/datameet/maps) for parliamentary constituency maps
+* **Raphael Susewind** for assembly constituency maps of Andhra Pradesh
+* [**Open Bangalore**](http://openbangalore.org/) for ward maps of Bangalore
 
 # How to Use
 
