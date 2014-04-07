@@ -8,7 +8,7 @@ What is covered:
 
 * Paliamentary Constituencies of India
 * Assembly Constituencies of Andhra Pradesh
-* Wards and Assembly Constituencies of Bangalore city (coming soon)
+* Wards and Assembly Constituencies of Bangalore city
 
 The webapp is hosted of Red Hat Open Shift.
 

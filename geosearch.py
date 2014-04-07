@@ -20,6 +20,8 @@ def geosearch(lat, lon):
         match['key'] = "{}/PC{:02d}".format(match['st_name'], match['pc_code'])
         if match['st_name'] == 'AP':
             match.update(geosearch_ap(match['pc_code'], lat, lon))
+        if match['st_name'] == 'KA' and match['pc_code'] in (24, 25, 26):
+            match.update(geosearch_bangalore_wards(lat, lon))
     return match
 
 def geosearch_ap(pc, lat, lon):
@@ -31,6 +33,13 @@ def geosearch_ap(pc, lat, lon):
         match['ac_key'] = "AP/AC{:03d}".format(match['ac_id'])
     else:
         match = {}
+    return match
+
+def geosearch_bangalore_wards(lat, lon):
+    point = 'Point({0} {1})'.format(lat, lon)
+    q = "SELECT ward_no, ward_name FROM bbmpwards WHERE ST_Within($point, the_geom)"
+    result = db.query(q, vars={"point": point})
+    match = result and result[0] or {}
     return match
 
 class index:
@@ -66,6 +75,8 @@ def debug():
     print "visakhapatnam", geosearch("83.21848150000005", "17.6868159")
     print "muralinagar, visakha", geosearch("83.25996740000005", "17.7471481")
     print "KPHB, hyd", geosearch("78.39204369999993", "17.4785496")
+    print "rtnagar, bangalore", geosearch("77.59295399999996", "13.02458")
+
 if __name__ == "__main__":
     if "--debug" in sys.argv:
         debug()
