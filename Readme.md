@@ -10,9 +10,7 @@ What is covered:
 * Assembly Constituencies of Andhra Pradesh
 * Wards and Assembly Constituencies of Bangalore city
 
-The webapp is hosted of Red Hat Open Shift.
-
-<http://geosearch-anandology.rhcloud.com>
+<http://geosearch.anandology.com/>
 
 # Credits
 
@@ -24,5 +22,5 @@ Thanks to:
 
 # How to Use
 
-See source of http://geosearch-anandology.rhcloud.com/
+See source of http://geosearch.anandology.com/
 
