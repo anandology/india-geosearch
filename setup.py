@@ -1,10 +1,10 @@
 from setuptools import setup
 
-setup(name='YourAppName',
-      version='1.0',
-      description='OpenShift App',
-      author='Your Name',
-      author_email='example@example.com',
-      url='http://www.python.org/sigs/distutils-sig/',
-#      install_requires=['Django>=1.3'],
+setup(name='india-geosearch',
+      version='0.1',
+      description='Reverse geolocation API for india political boundaries',
+      author='Anand Chitipothu',
+      author_email='anandology@gmail.com',
+      url='http://geosearch-anandology.rhccloud.com/',
+      install_requires=['web.py', 'flup', 'psycopg2'],
      )
