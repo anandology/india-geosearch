@@ -6,7 +6,7 @@
             var place = autocomplete.getPlace();
             if (!place.geometry)
                 return;
-            var url = "http://geosearch-anandology.rhcloud.com/geosearch?lat=" + place.geometry.location.A + "&lon=" + place.geometry.location.k;
+            var url = "http://geosearch-anandology.rhcloud.com/geosearch?lat=" + place.geometry.location.lat() + "&lon=" + place.geometry.location.lng();
             console.log(place.geometry.location);
             $.getJSON(url, function(response) {
               if (response) {
