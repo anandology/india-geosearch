@@ -12,7 +12,7 @@ app = web.application(urls, globals())
 db = web.database(dbn="postgres", db="geosearch")
 
 def geosearch(lat, lon):
-    point = 'Point({0} {1})'.format(lat, lon)
+    point = 'Point({0} {1})'.format(lon, lat)
     q = "SELECT pc_code, pc_name, st_code, st_name FROM india_pc_2014 WHERE ST_Within(ST_GeomFromText($point, 4326), geom)"
     result = db.query(q, vars={"point": point})
     match = result and result[0] or None
@@ -25,7 +25,7 @@ def geosearch(lat, lon):
     return match
 
 def geosearch_ap(pc, lat, lon):
-    point = 'Point({0} {1})'.format(lat, lon)
+    point = 'Point({0} {1})'.format(lon, lat)
     q = "SELECT ac_id, ac_name FROM ap_ac_2014 WHERE ST_Within(ST_GeomFromText($point, 4326), geom)"
     result = db.query(q, vars={"point": point})
     match = result and result[0] or None
@@ -36,7 +36,7 @@ def geosearch_ap(pc, lat, lon):
     return match
 
 def geosearch_bangalore_wards(lat, lon):
-    point = 'Point({0} {1})'.format(lat, lon)
+    point = 'Point({0} {1})'.format(lon, lat)
     q = "SELECT ward_no, ward_name FROM bbmpwards WHERE ST_Within($point, the_geom)"
     result = db.query(q, vars={"point": point})
     match = result and result[0] or {}
