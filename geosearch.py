@@ -22,6 +22,8 @@ def geosearch(lat, lon):
             match.update(geosearch_ap(match['pc_code'], lat, lon))
         if match['st_name'] == 'KA' and match['pc_code'] in (24, 25, 26):
             match.update(geosearch_bangalore_wards(lat, lon))
+        if match['st_name'] == 'KL':
+            match.update(geosearch_kerala(match['pc_code'], lat, lon))
     return match
 
 def geosearch_ap(pc, lat, lon):
@@ -31,6 +33,19 @@ def geosearch_ap(pc, lat, lon):
     match = result and result[0] or None
     if match:
         match['ac_key'] = "AP/AC{:03d}".format(match['ac_id'])
+    else:
+        match = {}
+    return match
+
+def geosearch_kerala(pc, lat, lon):
+    result = db.query("SELECT ac_code, pb_code FROM booth_coordinates" +
+                      " WHERE pc_code=$pc" +
+                      " ORDER BY (lat-$lat)*(lat-$lat) + (lon-$lon)*(lon-$lon)" + 
+                      " LIMIT 1", vars=locals())
+    if result:
+        match = result[0]
+        match['ac_key'] = "KL/AC{:03d}".format(match['ac_code'])
+        match['pb_key'] = "KL/AC{:03d}/PB{:04d}".format(match['ac_code'], match['pb_code'])
     else:
         match = {}
     return match
