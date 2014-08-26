@@ -45,7 +45,7 @@ def get_state_code(num):
     return d[num]
 
 def geosearch_polling_booth(pc, lat, lon):
-    result = db.query("SELECT ac_code, pb_code FROM booth_coordinates" +
+    result = db.query("SELECT state_code, ac_code, pb_code FROM booth_coordinates" +
                       " WHERE pc_code=$pc" +
                       " ORDER BY (lat-$lat)*(lat-$lat) + (lon-$lon)*(lon-$lon)" + 
                       " LIMIT 1", vars=locals())
