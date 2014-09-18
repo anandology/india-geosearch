@@ -22,7 +22,7 @@ def geosearch(lat, lon):
             match.update(geosearch_ap(match['pc_code'], lat, lon))
         if match['st_name'] == 'KA' and match['pc_code'] in (24, 25, 26):
             match.update(geosearch_bangalore_wards(lat, lon))
-        if match['st_name'] in ['KL', 'MP']:
+        if match['st_name'] in ['KL', 'MP', 'DL']:
             match.update(geosearch_polling_booth(match['pc_code'], lat, lon))
     return match
 
@@ -40,7 +40,8 @@ def geosearch_ap(pc, lat, lon):
 def get_state_code(num):
     d = {
         11: 'KL',
-        12: 'MP'
+        12: 'MP',
+        50: 'DL'
     }
     return d[num]
 
