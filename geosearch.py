@@ -22,8 +22,7 @@ def geosearch(lat, lon):
             match.update(geosearch_ap(match['pc_code'], lat, lon))
         if match['st_name'] == 'KA' and match['pc_code'] in (24, 25, 26):
             match.update(geosearch_bangalore_wards(lat, lon))
-        if match['st_name'] in ['KL', 'MP', 'DL']:
-            match.update(geosearch_polling_booth(match['pc_code'], lat, lon))
+        match.update(geosearch_polling_booth(match['st_name'], match['pc_code'], lat, lon))
     return match
 
 def geosearch_ap(pc, lat, lon):
@@ -37,24 +36,15 @@ def geosearch_ap(pc, lat, lon):
         match = {}
     return match
 
-def get_state_code(num):
-    d = {
-        11: 'KL',
-        12: 'MP',
-        50: 'DL'
-    }
-    return d[num]
-
-def geosearch_polling_booth(pc, lat, lon):
-    result = db.query("SELECT state_code, ac_code, pb_code FROM booth_coordinates" +
-                      " WHERE pc_code=$pc" +
+def geosearch_polling_booth(st_name, pc, lat, lon):
+    result = db.query("SELECT ac_code, pb_code FROM booth_coordinates" +
+                      " WHERE st_name=$st_name AND pc_code=$pc" +
                       " ORDER BY (lat-$lat)*(lat-$lat) + (lon-$lon)*(lon-$lon)" + 
                       " LIMIT 1", vars=locals())
     if result:
         match = result[0]
-        state = get_state_code(match['state_code'])
-        match['ac_key'] = "{}/AC{:03d}".format(state, match['ac_code'])
-        match['pb_key'] = "{}/AC{:03d}/PB{:04d}".format(state, match['ac_code'], match['pb_code'])
+        match['ac_key'] = "{}/AC{:03d}".format(st_name, match['ac_code'])
+        match['pb_key'] = "{}/AC{:03d}/PB{:04d}".format(st_name, match['ac_code'], match['pb_code'])
     else:
         match = {}
     return match
