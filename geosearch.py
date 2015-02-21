@@ -63,10 +63,18 @@ class index:
         return open(path).read()
 
 class geosearch_web:
+    def OPTIONS(self):
+        web.header("Access-Control-Allow-Origin", "*")
+        web.header("Access-Control-Allow-Methods", "GET")
+        headers = web.ctx.env.get('HTTP_ACCESS_CONTROL_REQUEST_HEADERS')
+        if headers:
+            web.header("Access-Control-Allow-Headers", headers)
+        return ""
+
     def GET(self):
+        self.OPTIONS()
         i = web.input(lat=None, lon=None)
         web.header("content-type", "application/json")
-        web.header("Access-Control-Allow-Origin", "*")
         if not i.lat or not i.lon:
             return '{"error": "Please specify lat and lon parameters"}'
         match = geosearch(i.lat, i.lon)
